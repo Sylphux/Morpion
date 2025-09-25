@@ -3,7 +3,7 @@ class Game
 
   def initialize
     #TO DO : créé 2 joueurs, créé un board, met le status à "on going", défini un current_player
-    player1 = Player.new("Player ", "O")
+    player1 = Player.new("Player 1", "O")
     player2 = Player.new("Player 2", "X")
     Board.new
   end

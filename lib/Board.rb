@@ -24,7 +24,6 @@ attr_accessor :boardarray
     #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
     #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
     puts "Initializing Board"
-    @boardarray = []
     fill_board #on lance la fonction qui remplit les cases de "#"
     for n in @boardarray
       puts n.valuecase
