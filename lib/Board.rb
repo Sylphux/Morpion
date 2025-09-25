@@ -2,6 +2,7 @@ class Board
 #TO DO : la classe a 1 attr_accessor : un array/hash qui contient les BoardCases.
 #Optionnellement on peut aussi lui rajouter un autre sous le nom @count_turn pour compter le nombre de coups joué
 attr_accessor :boardarray
+@@boardarray = []
 
   def fill_board
     bapos = 0 #index pour remplir boardarray de toutes les instances de cases
@@ -25,8 +26,11 @@ attr_accessor :boardarray
     puts "Initializing Board"
     @boardarray = []
     fill_board #on lance la fonction qui remplit les cases de "#"
-
-
+    for n in @boardarray
+      puts n.valuecase
+      puts n.value
+      puts
+    end
   end
 
   def play_turn
