@@ -1,3 +1,6 @@
 require_relative 'lib/Board'
-Board.new
-puts Board.return_ba
+require_relative 'lib/BoardCase'
+
+coucou = Board.new
+
+#puts coucou.boardarray[0][0]
