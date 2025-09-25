@@ -3,37 +3,30 @@ class Board
 #Optionnellement on peut aussi lui rajouter un autre sous le nom @count_turn pour compter le nombre de coups joué
 attr_accessor :boardarray
 
-  def initialize
-    #TO DO :
-    #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
-    #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
-    puts "test"
-
+  def fill_board
+    bapos = 0 #index pour remplir boardarray de toutes les instances de cases
     chiffre = 1
     lettre = 65
     while lettre != 68
       while chiffre < 4
-        BoardCase.new("#", "#{lettre.chr}#{chiffre}")
-        #puts "#{lettre.chr}#{chiffre}"
+        @boardarray[bapos] = BoardCase.new("#", "#{lettre.chr}#{chiffre}")
+        bapos += 1
         chiffre += 1
       end
       chiffre = 1
       lettre += 1
     end
+  end
 
-=begin     x = 0
-    y = 0
-    @boardarray = Array.new(3) {Array.new(3)}
-    while x < 3
-      while y < 3
-        @boardarray[x][y] = "#"
-        puts @boardarray[x][y]
-        y += 1
-      end
-      y = 0
-      x += 1
-    end 
-=end
+  def initialize
+    #TO DO :
+    #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
+    #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
+    puts "Initializing Board"
+    @boardarray = []
+    fill_board #on lance la fonction qui remplit les cases de "#"
+
+
   end
 
   def play_turn
