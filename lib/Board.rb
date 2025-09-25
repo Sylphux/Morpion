@@ -3,7 +3,7 @@ class Board
   @@boardarray = []
 
   def fill_board
-    bapos = 0 #index pour remplir boardarray de toutes les instances de cases
+    bapos = 0 #index to fill board array
     chiffre = 1
     lettre = 65
     while lettre != 68

@@ -1,16 +1,16 @@
 class Game
   attr_accessor :status, :currentp
 
-  def ask_name
-    puts "Pseudo du joueur :"
+  def ask_name(n)
+    puts "Pseudo du joueur #{n.to_s} : "
     ask = gets.chomp
     return ask
   end
 
   def initialize
     if !(Player.all[0])
-      player1 = Player.new(ask_name, "O")
-      player2 = Player.new(ask_name, "X")
+      player1 = Player.new(ask_name(1), "O")
+      player2 = Player.new(ask_name(2), "X")
     end
     @turn = 0
     @status = "ongoing"
@@ -38,13 +38,13 @@ class Game
     @valid_input = false
   end
 
-  def test_arrays
-    puts "@boardarray"
+  def test_arrays #in case we want to test the arrays
+    puts "\n@boardarray"
     for n in Board.get_board do
       print "#{n.valuecase} #{n.value} | "
     end
-    puts "@all_case"
-    for n in BoardCase.all do
+    puts "\n@all_case"
+    for n in Board.get_board do
       print "#{n.valuecase} #{n.value} | "
     end
   end
@@ -61,7 +61,6 @@ class Game
     until @valid_input == true # Verifies input in good and no already done
       print "Case : "
       ask = gets.chomp.to_s.upcase
-      #test_arrays
       if ask == "STOP"
         @status = "stopped"
         return
@@ -81,7 +80,7 @@ class Game
   end
 
   def new_round
-    puts "New game ? (Y/n)"
+    puts "\nNew game ? (Y/n)"
     ask = gets.chomp.to_s
     if ask == "" || ask == "y"
       Application.new
@@ -92,7 +91,7 @@ class Game
   end
 
   def game_end
-    puts "GAME OVER"
+    puts "\nGAME OVER"
     if @act_board.victory?
       puts "#{@currentp.name} has won !"
     else
