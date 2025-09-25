@@ -4,6 +4,7 @@ class Application
     # 
     puts "j'aime les frites"
     puts "J'adore la bière"
+    puts "J'aime les transistors"
   end
 
 end
