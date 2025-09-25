@@ -1,16 +1,22 @@
 class Game
-  #TO DO : la classe a plusieurs attr_accessor: le current_player (égal à un objet Player), le status (en cours, nul ou un objet Player s'il gagne), le Board et un array contenant les 2 joueurs.
-  attr_accessor :status
+  attr_accessor :status, :currentp
+
+  def ask_name
+    puts "Pseudo du joueur :"
+    ask = gets.chomp
+    return ask
+  end
 
   def initialize
-    #TO DO : créé 2 joueurs, créé un board, met le status à "on going", défini un current_player
-    player1 = Player.new("Player 1", "O")
-    player2 = Player.new("Player 2", "X")
+    if !(Player.all[0])
+      player1 = Player.new(ask_name, "O")
+      player2 = Player.new(ask_name, "X")
+    end
+    @turn = 0
     @status = "ongoing"
     @currentp = Player.all[rand(0..1)]
     @valid_input = false
-    Board.new
-    turn
+    @act_board = Board.new
   end
 
   def change_player
@@ -23,38 +29,76 @@ class Game
 
   def verify_input(source)
     if source.match?(/[A-C]/) && source.match?(/[1-3]/)
-      @valid_input = true
-      return
-    else
-      puts "Wrong input."
+      if BoardCase.case(source).value == "#"
+        @valid_input = true
+        return
+      end
     end
+    puts "Wrong input."
     @valid_input = false
   end
 
+  def test_arrays
+    puts "@boardarray"
+    for n in Board.get_board do
+      print "#{n.valuecase} #{n.value} | "
+    end
+    puts "@all_case"
+    for n in BoardCase.all do
+      print "#{n.valuecase} #{n.value} | "
+    end
+  end
+
   def turn
-    #TO DO : méthode faisant appelle aux méthodes des autres classes (notamment à l'instance de Board). Elle affiche le plateau, demande au joueur ce qu'il joue, vérifie si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie.
     Show.show_board
     if @status != "ongoing"
       game_end
       return
     end
     change_player
+    puts "\nRound #{@turn}"
     puts "\nIt's #{@currentp.name}'s turn (you are #{@currentp.value})"
-    until @valid_input == true
+    until @valid_input == true # Verifies input in good and no already done
       print "Case : "
       ask = gets.chomp.to_s.upcase
+      #test_arrays
+      if ask == "STOP"
+        @status = "stopped"
+        return
+      end
       verify_input(ask)
     end
     @valid_input = false
     BoardCase.case(ask).modify_case(@currentp.value)
+    @turn += 1
+    if @turn == 9
+      @status = "end"
+    end
+    if @act_board.victory?
+      @status = "finished"
+      game_end
+    end
   end
 
   def new_round
-    # TO DO : relance une partie en initialisant un nouveau board mais en gardant les mêmes joueurs.
+    puts "New game ? (Y/n)"
+    ask = gets.chomp.to_s
+    if ask == "" || ask == "y"
+      Application.new
+    else
+      puts "Goodbye !"
+      exit
+    end
   end
 
   def game_end
-    # TO DO : permet l'affichage de fin de partie quand un vainqueur est détecté ou si il y a match nul
-  end    
+    puts "GAME OVER"
+    if @act_board.victory?
+      puts "#{@currentp.name} has won !"
+    else
+      puts "No one wins !"
+    end
+    new_round
+  end
 
 end

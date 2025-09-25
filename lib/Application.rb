@@ -1,15 +1,11 @@
 class Application
 
-  def perform
-    # TO DO : méthode qui initialise le jeu puis contient des boucles while pour faire tourner le jeu tant que la partie n'est pas terminée.
-    puts "j'aime les frites"
-    puts "J'adore la bière"
-    puts "J'aime les transistors"
-    Game.new
-  end
-
-  def initialize
-    perform
+  def initialize #Initializes an instance of the game
+    current_game = Game.new
+    while current_game.status == "ongoing"
+      current_game.turn
+    end
+    current_game.game_end
   end
 
 end

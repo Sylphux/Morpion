@@ -1,7 +1,6 @@
 class Show
 
-  def self.show_board_debile
-    #TO DO : affiche sur le terminal l'objet de classe Board en entrée. S'active avec un Show.new.show_board(instance_de_Board)
+  def self.show_board_debile # puts grossièrely le stuff
     for n in Board.get_board
       puts n.valuecase
       puts n.value
@@ -10,14 +9,14 @@ class Show
   end
 
   def self.show_board
-    system "clear"
-    puts "\n  A B C"
+    #system "clear"
+    puts "\n  1 2 3"
     x = 0
     y = 0
     i = 0
-    chiffre = 1
+    chiffre = 65
     while y < 3
-      print chiffre.to_s + " "
+      print chiffre.chr + " "
       while x < 3
         print (Board.get_board[i].value + " ")
         i += 1
@@ -29,5 +28,6 @@ class Show
       y += 1
     end
     puts
-  end
+  end 
+
 end
