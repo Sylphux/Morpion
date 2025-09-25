@@ -15,7 +15,17 @@ attr_accessor :value, :valuecase, :all_case
     @@all_case
   end
 
-  def self.case(location)
-    @fill_board
+  def modify_case(sign)
+    @value = sign
   end
+
+  def self.case(location) #obtenir l'adresse de la case par le nom "A2"
+    for n in @@all_case
+      if n.valuecase == location
+        return n
+      end
+    end
+  end
+
+
 end

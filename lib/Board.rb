@@ -10,7 +10,7 @@ attr_accessor :boardarray
     lettre = 65
     while lettre != 68
       while chiffre < 4
-        @boardarray[bapos] = BoardCase.new("#", "#{lettre.chr}#{chiffre}")
+        @@boardarray[bapos] = BoardCase.new("#", "#{lettre.chr}#{chiffre}")
         bapos += 1
         chiffre += 1
       end
@@ -19,17 +19,16 @@ attr_accessor :boardarray
     end
   end
 
+  def self.get_board #permet de récupérer le tableau ailleurs
+    @@boardarray
+  end
+
   def initialize
     #TO DO :
     #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
     #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
     puts "Initializing Board"
     fill_board #on lance la fonction qui remplit les cases de "#"
-    for n in @boardarray
-      puts n.valuecase
-      puts n.value
-      puts
-    end
   end
 
   def play_turn
