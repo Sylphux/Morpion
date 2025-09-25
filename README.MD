@@ -28,9 +28,16 @@
 ```
 
 A small **ruby morpion game** where you can start multiple games in a row.
+
+## How to launch :
+
+```
+bundle install
+ruby app.rb
+```
+
 ## custom commands : 
 - Type `stop` to stop playing during a game
-- use `bundler install` if you want to use pry or rubocop for debugging
 
 # Credits
 
