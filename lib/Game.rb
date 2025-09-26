@@ -75,6 +75,7 @@ class Game
     end
     if @act_board.victory?
       @status = "finished"
+      Show.show_board
       game_end
     end
   end
